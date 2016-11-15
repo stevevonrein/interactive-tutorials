@@ -1,9 +1,9 @@
 Tutorial
 --------
 
-Zeiger sind ebenfalls Variablen und spielen eine sehr wichtige Rolle in C. Sie werden aus vielen Gründen benutzt:
+Zeiger (Pointer) sind ebenfalls Variablen und spielen eine sehr wichtige Rolle in C. Sie werden aus vielen Gründen benutzt:
 
-* Strings
+* Zeichenketten (Strings)
 * Dynamische Speicher Belegung
 * Referenzen als Funktionsargumente benutzen
 * Komplexe Datenstrukturen zusammenstellen
@@ -14,38 +14,38 @@ Und viele andere.
 
 ### Was ist ein Zeiger?
 
-Ein Zeiger ist im Prinzip eine simple Ganzzahl(integer)-Variable, die eine Speicheradresse hält, die zu einem Wert zeigen, anstatt den Wert selbst zu halten.
+Ein Zeiger ist im Prinzip eine simple Ganzzahl(integer)-Variable, die eine Speicheradresse hält, die zu einem Wert zeigt, anstatt den Wert selbst zu halten.
 
-Der Arbeitsspeicher eines Computers ist ein sequentieller Datenspeicher und ein Zeiger zeigt auf einen bestimmte Punkt in diesem Speicher. Unser Programm kann Zeiger benutzen um riesige Mengen an Speicher zu lesen - abhängig davon wieviel wir von unserem Startpunkt aus lesen.
+Der Arbeitsspeicher eines Computers ist ein sequentieller Datenspeicher und ein Zeiger zeigt auf einen bestimmte Punkt in diesem Speicher. Unser Programm kann Zeiger benutzen, um riesige Mengen an Speicher zu lesen - abhängig davon, wie viel wir von unserem Startpunkt aus lesen.
 
 ### Strings sind Zeiger
 
-Wir haben bereits über Strings geredet, aber jetzt gehen wir ein bisschen tiefer in die Materie, um zu verstehen was Strings in C wirklich sind. Wir nennen sie auch C-Strings, um sie von anderen Strings wie in C++ zu unterscheiden.
+Wir haben bereits über Strings geredet, aber jetzt tauchen wir ein bisschen tiefer in die Materie ein, um zu verstehen, was Strings in C wirklich sind. Wir nennen sie auch C-Strings, um sie von anderen Strings wie in C++ zu unterscheiden.
 
-Die folgende Zeile:
+Die folgende Anweisung:
 
     char * name = "John";
 
-tut 3 Dinge:
+bewirkt drei Dinge:
 
-1. Es legt eine lokale (stack) Variable namens `name` an, die ein Zeiger auf ein einzelnes Zeichen ist.
-2. Es sorgt dafür das der String "John" irgendwo im Arbeitsspeicher erscheint (nachdem das Programm kompiliert und ausgeführt wurde, natürlich).
-3. Es initialisiert das `name` Argument so, dass es dorthin zeigt, wo das 'J' Zeichen im Speicher liegt (gefolgt von den anderen Zeichen des Strings).
+1. Sie legt eine lokale (Stack-) Variable namens `name` an, die ein Zeiger auf ein einzelnes Zeichen ist.
+2. Sie sorgt dafür, dass der String "John" irgendwo im Arbeitsspeicher erscheint (natürlich erst nachdem das Programm kompiliert und ausgeführt wurde).
+3. Sie initialisiert das Argument `name` so, dass es dorthin zeigt, wo das Zeichen 'J'  im Speicher liegt (gefolgt von den anderen Zeichen des Strings).
 
 Versuchen wir die `name` Variable wie einen Array anzusprechen, funktioniert dies und sie wird den Ordinalwert des Zeichens "J" zurückgeben, da die `name` Variable tatsächlich an den Anfang des Strings zeigt.
 
-Da wir wissen, dass der Arbeitsspeicher sequentiell ist, können wir annehmen das wir das nächste Zeichen des Strings bekommen, wenn wir uns im Speicher nach vorne bewegen, bis wir das Ende des Strings erreichen, das mit einem Null Zeichen gekennzeichnet ist. (Das Zeichen mit dem Ordinalwert 0, geschrieben `\0`)
+Da wir wissen, dass der Arbeitsspeicher sequentiell ist, können wir annehmen, dass wir das nächste Zeichen des Strings bekommen, wenn wir uns im Speicher nach vorne bewegen, bis wir das Ende des Strings erreichen, das mit einem Null Zeichen gekennzeichnet ist. (Das Zeichen mit dem Ordinalwert 0, geschrieben `\0`)
 
 ### Dereferenzierung
 
-Dereferenzierung nennt man den Zugriff auf den Wert auf den ein Zeiger zeigt, anstatt auf die Speicheradresse. Wir benutzen Dereferenzierung bereits bei Arrays - wir wussten es nur noch nicht. Der Zugriffsoperator, gekennzeichnet durch eckige Klammern - `[0]` zum Beispiel, um das erste Element zu erreichen. Und da Arrays eigentlich Zeiger sind, ist der Zugriff auf das erste Element eines Arrays genau dasselbe wie das Dereferenzieren eines Zeigers. Zeiger dereferenziert man mit dem Sternchen Operator: `*`.
+Dereferenzierung nennt man den Zugriff auf den Wert, auf den ein Zeiger zeigt anstatt auf die Speicheradresse. Wir benutzten Dereferenzierung bereits bei Arrays - wir wussten es nur noch nicht. Der Zugriffsoperator, gekennzeichnet durch eckige Klammern - `[0]` zum Beispiel, um das erste Element zu erreichen. Und da Arrays eigentlich Zeiger sind, ist der Zugriff auf das erste Element eines Arrays genau das Gleiche wie das Dereferenzieren eines Zeigers. Zeiger dereferenziert man mit dem Sternchen Operator: `*`.
 
 Wenn wir einen Array erstellen wollen, der zu einer anderen Variable auf unserem Stack zeigt, schreiben wir den folgenden Code:
 
     /* definiere eine lokale Variable a */
     int a = 1;
 
-    /* definiere eine Zeigervariable und richte sie auf a mit Hilfe des & Operators */
+    /* definiere eine Zeigervariable und richte sie auf a mit Hilfe des &-Operators */
     int * pointer_to_a = &a;
 
     printf("Der Wert von a ist %d\n", a);
